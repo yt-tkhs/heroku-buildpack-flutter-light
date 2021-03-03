@@ -23,7 +23,7 @@ Other key improvements include the [Heroku CI](https://devcenter.heroku.com/arti
 Simply add the following two Buildpacks in your app configuration (in this order):
 
 1. `ee/heroku-buildpack-flutter-light`
-2. `heroku/heroku-buildpack-static`
+2. `heroku-community/static`
 
 You can do this using the web interface (in the "Settings" tab) or with the [`heroku buildpacks:set`](https://devcenter.heroku.com/articles/buildpacks#setting-a-buildpack-on-an-application) command.
 
