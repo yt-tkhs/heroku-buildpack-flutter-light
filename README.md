@@ -86,14 +86,14 @@ Alternatively, for repositories where the Flutter project is not located in the 
 
 During tests, all your project's dependencies are present (including the Dart SDK, Flutter SDK, pub.dev requirements, and command-line tools), so you can use them when specifying the testing command. 
 
-#### Options
+## Options
 
 Optionally, you can use [config variables](https://devcenter.heroku.com/articles/config-vars) to customize the Buildpack's behavior:
 
 | Variable |  Default        |  Description
 |----------|------------------| -------------------|
 | FLUTTER_CLEANUP | `true` | Whether to remove sources, tools, and dependencies before deployment |
-| FLUTTER_VERSION | *Last version in [beta channel](https://flutter.dev/docs/development/tools/sdk/releases?tab=linux).* | The **name of the version** used to compile the project
+| FLUTTER_VERSION | *Last version in [beta channel](https://flutter.dev/docs/development/tools/sdk/releases?tab=linux).* | Flutter version used to compile the project
 | FLUTTER_BUILD | `flutter build web --release --quiet` | The command used to build the project | 
 | FLUTTER_SOURCE_DIR | `/` | The folder in your repository where the Flutter project is kept |
 | FLUTTER_DEPLOY_DIR | `public_html` | The folder where the compiled app should be placed |
