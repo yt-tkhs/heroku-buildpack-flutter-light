@@ -22,8 +22,8 @@ Other key improvements include the [Heroku CI](https://devcenter.heroku.com/arti
 
 Simply add the following two Buildpacks in your app configuration (in this order):
 
-1. `https://github.com/ee/heroku-buildpack-flutter-light`
-2. `https://github.com/heroku/heroku-buildpack-static`
+1. `ee/heroku-buildpack-flutter-light`
+2. `heroku/heroku-buildpack-static`
 
 You can do this using the web interface (in the "Settings" tab) or with the [`heroku buildpacks:set`](https://devcenter.heroku.com/articles/buildpacks#setting-a-buildpack-on-an-application) command.
 
@@ -33,7 +33,7 @@ After deploying you should see your Flutter Web application. You can optionally 
 
 If your Flutter application is a part of a bigger project that already has its way of serving static files (for example with Node, Python, PHP, or Ruby), you can easily reuse it.
 
-Add `https://github.com/ee/heroku-buildpack-flutter-light` to your Buildpacks, set `FLUTTER_SOURCE_DIR` to the directory (within your repository) where the Flutter project is located, and `FLUTTER_DEPLOY_DIR` to where the compiled application should be placed (i.e., a directory that your framework uses to serve static files).
+Add `ee/heroku-buildpack-flutter-light` to your Buildpacks, set `FLUTTER_SOURCE_DIR` to the directory (within your repository) where the Flutter project is located, and `FLUTTER_DEPLOY_DIR` to where the compiled application should be placed (i.e., a directory that your framework uses to serve static files).
 
 ## Heroku CI integration
 The Buildpack can be easily integrated with Heroku's Continuous Integration service ([Heroku CI](https://devcenter.heroku.com/articles/heroku-ci)) to automatically run linters and tests. 
@@ -57,7 +57,7 @@ The `app.json` file should contain the app configuration, including the testing 
   },
   "buildpacks": [
     {
-      "url": "https://github.com/ee/heroku-buildpack-flutter-light"
+      "url": "ee/heroku-buildpack-flutter-light"
     }
   ],
 }
@@ -76,7 +76,7 @@ Alternatively, for repositories where the Flutter project is not located in the 
   },
   "buildpacks": [
     {
-      "url": "https://github.com/ee/heroku-buildpack-flutter-light"
+      "url": "ee/heroku-buildpack-flutter-light"
     }
   ],
   "env": {
