@@ -15,6 +15,7 @@ Other key improvements include the [Heroku CI](https://devcenter.heroku.com/arti
 ✅ Configurable directory structure \
 ✅ Heroku CI integration \
 ✅ Caching of dependencies (like Flutter, Dart, and pub.dev packages) between builds 
+✅ Works well with [heroku-buildpack-static](https://github.com/heroku/heroku-buildpack-static) and other Buildpacks
 
 ## Instalation
 ### With `heroku-buildpack-static` (recommended)
