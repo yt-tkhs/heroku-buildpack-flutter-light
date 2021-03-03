@@ -14,7 +14,7 @@ Other key improvements include the [Heroku CI](https://devcenter.heroku.com/arti
 ✅ Light footprint (deploys only the compiled files, stripping all sources, tools, and dependencies) \
 ✅ Configurable directory structure \
 ✅ Heroku CI integration \
-✅ Caching of dependencies (like Flutter, Dart, and pub.dev packages) between builds 
+✅ Caching of dependencies (like Flutter, Dart, and pub.dev packages) between builds \
 ✅ Works well with [heroku-buildpack-static](https://github.com/heroku/heroku-buildpack-static) and other Buildpacks
 
 ## Instalation
