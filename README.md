@@ -1,5 +1,5 @@
 # Heroku Buildpack Flutter Light 🪶
-A configurable Heroku Buildpack with a light footprint. Designed to be easily paired with other Buildpacks and integrated into existing projects.
+Build Flutter Web projects on Heroku. A configurable Buildpack with a light footprint. Designed to be easily paired with other Buildpacks and integrated into existing projects.
 
 ## Why Heroku Buildpack Flutter Light?
 This Buildpack was originally forked from Diego Zepeda's [Heroku Buildpack Flutter](https://github.com/diezep/heroku-buildpack-flutter). After testing, we realized that we needed to make different architectural tradeoffs than the original package. 
