@@ -28,6 +28,7 @@ Simply add the following two Buildpacks in your app configuration (in this order
 You can do this using the web interface (in the "Settings" tab) or with the [`heroku buildpacks:set`](https://devcenter.heroku.com/articles/buildpacks#setting-a-buildpack-on-an-application) command.
 
 After deploying you should see your Flutter Web application. You can optionally customize the way the application is built and deployed using [Heroku Buildpack Flutter Light's options](#options) and [heroku-buidlpack-static's configuration](https://github.com/heroku/heroku-buildpack-static#configuration).
+We strongly recommend pinning a specific Flutter version with the `FLUTTER_VERSION` config variable.
 
 ### With a different server-side technology (advanced)
 
