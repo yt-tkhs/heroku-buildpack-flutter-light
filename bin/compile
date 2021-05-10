@@ -82,8 +82,9 @@ if [ -n "$FLUTTER_VERSION" ]; then
   if [ "$FLUTTER_VERSION" != "$FLUTTER_INSTALLED_VERSION" ]; then
     print "Installing Flutter SDK version : $FLUTTER_VERSION"
     
-    if [[ ${FLUTTER_VERSION:0:1} == "v" ]] ; then BRANCH=$FLUTTER_VERSION; else BRANCH="v$FLUTTER_VERSION"; fi
-    git --git-dir=.flutter/.git switch --discard-changes $BRANCH | indent
+    if [[ ${FLUTTER_VERSION:0:1} == "v" ]] ; then GIT_TAG=$FLUTTER_VERSION; else GIT_TAG="v$FLUTTER_VERSION"; fi
+    git --git-dir=.flutter/.git git checkout -b -f $GIT_TAG | indent
+    .flutter/bin/flutter doctor
   fi
   rm .flutter.json
 
