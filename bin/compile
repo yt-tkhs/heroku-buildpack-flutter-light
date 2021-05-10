@@ -53,13 +53,25 @@ else
 fi
 mkdir -p $DEPLOY_DIR
 
+# Find the git tag/branch to get from Flutter repo
+if [ -n "$FLUTTER_VERSION" ]; then
+  if [[ ${FLUTTER_VERSION:0:1} == "v" ]] ; then GIT_TAG=$FLUTTER_VERSION; else GIT_TAG="v$FLUTTER_VERSION"; fi
+else
+  GIT_TAG="stable"
+fi
+
 # Restore Flutter SDK from cache
-if [ -d "$CACHE_DIR/.flutter" ]; then
+if [ -d "$CACHE_DIR/.flutter" ] && grep -qFx $GIT_TAG "$CACHE_DIR/.flutter-version"; then
   print "Restoring Flutter SDK from CACHE"
   cp -R $CACHE_DIR/.flutter $SOURCE_DIR
 else
   print "Installing SDK from Github repository."
-  git clone https://github.com/flutter/flutter.git .flutter --quiet
+  git clone -c advice.detachedHead=false --depth 1 -b $GIT_TAG https://github.com/flutter/flutter.git .flutter --quiet
+
+  if [ "$GIT_TAG" == "stable" ]; then
+    print "Running flutter upgrade command"
+    .flutter/bin/flutter upgrade --quiet | indent
+  fi
 fi
 
 # Restore the packages from cache
@@ -71,32 +83,6 @@ fi
 # Create a directory for Dart packages
 PUB_CACHE="$SOURCE_DIR/.pub-cache/"
 mkdir -p $PUB_CACHE
-
-# Check if FLUTTER_VERSION variables is set.
-if [ -n "$FLUTTER_VERSION" ]; then
-  # Load bash variables from flutter --machine --version and read it like  $FLUTTER_VERSION variable.
-  .flutter/bin/flutter --machine --version > .flutter.json
-  FLUTTER_INSTALLED_VERSION=$(grep -o '"frameworkVersion": *"[^"]*' .flutter.json | grep -o '[^"]*$')
-
-  # Check if the FLUTTER_VERSION is the same with the installed one.
-  if [ "$FLUTTER_VERSION" != "$FLUTTER_INSTALLED_VERSION" ]; then
-    print "Installing Flutter SDK version : $FLUTTER_VERSION"
-    
-    if [[ ${FLUTTER_VERSION:0:1} == "v" ]] ; then GIT_TAG=$FLUTTER_VERSION; else GIT_TAG="v$FLUTTER_VERSION"; fi
-    git --git-dir=.flutter/.git git checkout -b -f $GIT_TAG | indent
-    .flutter/bin/flutter doctor
-  fi
-  rm .flutter.json
-
-else
-
-  print "Running flutter upgrade command"
-  if [ "$channel" != "stable" ]; then
-    .flutter/bin/flutter channel stable | indent
-  fi
-
-  .flutter/bin/flutter upgrade --quiet | indent
-fi
 
 print "Enabling Web support"
 .flutter/bin/flutter config --enable-web --quiet | indent
@@ -124,6 +110,7 @@ if [ -x .flutter/bin/flutter ]; then
 
   cp -R $SOURCE_DIR/.flutter $CACHE_DIR/.flutter
   cp -R $SOURCE_DIR/.pub-cache $CACHE_DIR/.pub-cache
+  echo $GIT_TAG > $CACHE_DIR/.flutter-version
 fi
 
 # Check  FLUTTER_CLEANUP var to delete all files or keep it.
