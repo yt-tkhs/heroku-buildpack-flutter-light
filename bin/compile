@@ -81,7 +81,9 @@ if [ -n "$FLUTTER_VERSION" ]; then
   # Check if the FLUTTER_VERSION is the same with the installed one.
   if [ "$FLUTTER_VERSION" != "$FLUTTER_INSTALLED_VERSION" ]; then
     print "Installing Flutter SDK version : $FLUTTER_VERSION"
-    .flutter/bin/flutter version $FLUTTER_VERSION --quiet | indent
+    
+    if [[ ${FLUTTER_VERSION:0:1} == "v" ]] ; then BRANCH=$FLUTTER_VERSION; else BRANCH="v$FLUTTER_VERSION"; fi
+    git --git-dir=.flutter/.git checkout $BRANCH | indent
   fi
   rm .flutter.json
 
