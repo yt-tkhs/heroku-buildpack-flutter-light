@@ -51,7 +51,6 @@ if [ -n "$FLUTTER_DEPLOY_DIR" ]; then
 else
   DEPLOY_DIR=$BUILD_DIR/public_html
 fi
-mkdir -p $DEPLOY_DIR
 
 # Find the git tag/branch to get from Flutter repo
 if [ -n "$FLUTTER_VERSION" ]; then
@@ -119,11 +118,14 @@ if [ "$FLUTTER_CLEANUP" != false ]; then
 
   mkdir -p $SOURCE_DIR/TO_DELETE
 
-  mv !("TO_DELETE") TO_DELETE
-  mv TO_DELETE/build/web/* $DEPLOY_DIR
-
+  mv !("TO_DELETE"|"build") TO_DELETE
   rm -rf TO_DELETE
 fi
+
+print "Moving static files to the deploy dir"
+mkdir -p $DEPLOY_DIR
+mv $SOURCE_DIR/build/web/* $DEPLOY_DIR
+rm -rf $SOURCE_DIR/build
 
 # heroku-buildpac-static compatibility
 if [ ! -f $BUILD_DIR/static.json ]; then
