@@ -54,7 +54,7 @@ fi
 
 # Find the git tag/branch to get from Flutter repo
 if [ -n "$FLUTTER_VERSION" ]; then
-  if [[ ${FLUTTER_VERSION:0:1} == "v" ]] ; then GIT_TAG=$FLUTTER_VERSION; else GIT_TAG="v$FLUTTER_VERSION"; fi
+  GIT_TAG=$FLUTTER_VERSION
 else
   GIT_TAG="stable"
 fi
