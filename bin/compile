@@ -127,7 +127,9 @@ mkdir -p $DEPLOY_DIR
 mv $SOURCE_DIR/build/web/* $DEPLOY_DIR
 rm -rf $SOURCE_DIR/build
 
-cp $SOURCE_DIR/Procfile $DEPLOY_DIR/
+if [ -f $BUILD_DIR/static.json ]; then
+  cp $BUILD_DIR/Procfile $DEPLOY_DIR/Procfile
+fi
 
 # heroku-buildpac-static compatibility
 if [ ! -f $BUILD_DIR/static.json ]; then
