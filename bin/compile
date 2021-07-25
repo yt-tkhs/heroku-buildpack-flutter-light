@@ -127,7 +127,7 @@ mkdir -p $DEPLOY_DIR
 mv $SOURCE_DIR/build/web/* $DEPLOY_DIR
 rm -rf $SOURCE_DIR/build
 
-if [ -f $BUILD_DIR/static.json ]; then
+if [ -f $BUILD_DIR/Procfile ]; then
   cp $BUILD_DIR/Procfile $DEPLOY_DIR/Procfile
 fi
 
