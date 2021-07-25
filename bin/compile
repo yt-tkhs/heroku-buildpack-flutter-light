@@ -118,7 +118,7 @@ if [ "$FLUTTER_CLEANUP" != false ]; then
 
   mkdir -p $SOURCE_DIR/TO_DELETE
 
-  mv !("TO_DELETE"|"build"|"static.json"|"Procfile") TO_DELETE
+  mv !("TO_DELETE"|"build"|"static.json"|"Procfile"|"config") TO_DELETE
   rm -rf TO_DELETE
 fi
 
@@ -131,12 +131,8 @@ if [ -f $SOURCE_DIR/Procfile ]; then
   cp $SOURCE_DIR/Procfile $DEPLOY_DIR/Procfile
 fi
 
-if [ -f $BUILD_DIR/Procfile ]; then
-  cp $BUILD_DIR/Procfile $DEPLOY_DIR/Procfile
-fi
-
-if [ -f Procfile ]; then
-  cp Procfile $DEPLOY_DIR/Procfile
+if [ -f $SOURCE_DIR/config ]; then
+  cp $SOURCE_DIR/config $DEPLOY_DIR
 fi
 
 # heroku-buildpac-static compatibility
