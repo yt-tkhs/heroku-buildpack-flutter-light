@@ -128,7 +128,7 @@ mv $SOURCE_DIR/build/web/* $DEPLOY_DIR
 rm -rf $SOURCE_DIR/build
 
 if [ -d $SOURCE_DIR/heroku ]; then
-  cp $SOURCE_DIR/heroku/* $DEPLOY_DIR
+  mv $SOURCE_DIR/heroku/* $DEPLOY_DIR
 fi
 
 # heroku-buildpac-static compatibility
